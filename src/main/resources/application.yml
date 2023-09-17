@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/gamedata
-    username: root
-    password: duong123
+    url: jdbc:mysql://sql12.freesqldatabase.com:3306/sql12646994
+    username: sql12646994
+    password: k2PfCNR2Ut
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
