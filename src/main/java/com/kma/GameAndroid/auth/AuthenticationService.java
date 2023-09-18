@@ -3,6 +3,7 @@ package com.kma.GameAndroid.auth;
 import com.kma.GameAndroid.config.JwtService;
 import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.enumCustom.Role;
+import com.kma.GameAndroid.exception.EmailAlreadyExistException;
 import com.kma.GameAndroid.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if(userRepository.countByEmail(request.getEmail())==1) {
+            throw new EmailAlreadyExistException("Email already exists");
+        }
         var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())

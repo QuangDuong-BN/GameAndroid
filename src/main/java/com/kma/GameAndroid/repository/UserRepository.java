@@ -11,24 +11,34 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
+    // tim kiem user theo email
     Optional<User> findByEmail(String email);
-    @Query("SELECT u FROM User u ORDER BY u.time1 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time1 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime1ASC();
-    @Query("SELECT u FROM User u ORDER BY u.time2 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time2 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime2ASC();
-    @Query("SELECT u FROM User u ORDER BY u.time3 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time3 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime3ASC();
-    @Query("SELECT u FROM User u ORDER BY u.time4 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time4 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime4ASC();
-    @Query("SELECT u FROM User u ORDER BY u.time5 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time5 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime5ASC();
-    @Query("SELECT u FROM User u ORDER BY u.time6 ASC")
+
+    @Query("SELECT u FROM User u ORDER BY u.time6 ASC LIMIT 6")
     List<User> findTop6ByOrderByTime6ASC();
+
+    @Query("SELECT COUNT(u) FROM User u WHERE u.email = :email")
+    Long countByEmail(@Param("email") String email);
 
     @Transactional
     @Modifying
     @Query("UPDATE User u SET u.time1 = :newTime1 WHERE u.email = :email")
-    int updateTime1(@Param("email") String email, @Param("newTime1") Double newTime1);
+    void updateTime1(@Param("email") String email, @Param("newTime1") Double newTime1);
 
     @Transactional
     @Modifying
@@ -54,7 +64,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.time6 = :newTime WHERE u.email = :email")
     void updateTime6(@Param("email") String email, @Param("newTime") Double newTime);
-
 
 
 }

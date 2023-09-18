@@ -2,6 +2,7 @@ package com.kma.GameAndroid.controller;
 
 import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.entityDto.LevelDataDto;
+import com.kma.GameAndroid.repository.UserRepository;
 import com.kma.GameAndroid.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/ChangeLevel")
     public ResponseEntity<String> changeLevel(HttpServletRequest request,
@@ -31,6 +34,14 @@ public class UserController {
         String userName = userService.getUsernameByToken(request);
         return userName;
     }
+
+    @GetMapping("/countByEmail")
+    public Long countByEmail(@RequestParam("email") String email) {
+        Long count = userRepository.countByEmail(email);
+        return count;
+    }
+
+
 
     @GetMapping("/getLevelData")
     public ResponseEntity<LevelDataDto> getLevelData(HttpServletRequest request) {
