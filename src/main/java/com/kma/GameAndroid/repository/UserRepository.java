@@ -14,22 +14,22 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // tim kiem user theo email
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT u FROM User u ORDER BY u.time1 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time1 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime1ASC();
 
-    @Query("SELECT u FROM User u ORDER BY u.time2 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time2 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime2ASC();
 
-    @Query("SELECT u FROM User u ORDER BY u.time3 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time3 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime3ASC();
 
-    @Query("SELECT u FROM User u ORDER BY u.time4 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time4 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime4ASC();
 
-    @Query("SELECT u FROM User u ORDER BY u.time5 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time5 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime5ASC();
 
-    @Query("SELECT u FROM User u ORDER BY u.time6 ASC LIMIT 6")
+    @Query("SELECT u FROM User u ORDER BY u.time6 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime6ASC();
 
     @Query("SELECT COUNT(u) FROM User u WHERE u.email = :email")
