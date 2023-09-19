@@ -3,10 +3,12 @@ package com.kma.GameAndroid.service;
 import com.kma.GameAndroid.config.JwtService;
 import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.entityDto.LevelDataDto;
+import com.kma.GameAndroid.entityDto.PasswordDto;
 import com.kma.GameAndroid.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,8 @@ public class UserService {
     private JwtService jwtService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public LevelDataDto getLevelData(String email) {
         Optional<User> userName = userRepository.findByEmail(email);
@@ -42,6 +46,19 @@ public class UserService {
         return "Token not provided or invalid";
     }
 
+    public void changeName(HttpServletRequest request, String name) {
+        String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
+        token = token.substring(7); // Loại bỏ "Bearer " từ token
+        String email = jwtService.extractUsername(token); // Sử dụng JwtService để lấy username từ token
+        userRepository.updateName(email, name);
+    }
+
+    public void changePassword(HttpServletRequest request, PasswordDto passwordDto) {
+        String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
+        token = token.substring(7); // Loại bỏ "Bearer " từ token
+        String email = jwtService.extractUsername(token); // Sử dụng JwtService để lấy username từ token
+        userRepository.updatePassword(email, passwordEncoder.encode(passwordDto.getPassword()));
+    }
 
     public List<User> findTop6ByOrderByTime1ASC() {
         return userRepository.findTop6ByOrderByTime1ASC();
@@ -125,4 +142,6 @@ public class UserService {
             }
         }
     }
+
+
 }

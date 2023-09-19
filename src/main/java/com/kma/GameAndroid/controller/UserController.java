@@ -2,11 +2,15 @@ package com.kma.GameAndroid.controller;
 
 import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.entityDto.LevelDataDto;
+import com.kma.GameAndroid.entityDto.NameDto;
+import com.kma.GameAndroid.entityDto.PasswordDto;
+import com.kma.GameAndroid.entityDto.UserDto;
 import com.kma.GameAndroid.repository.UserRepository;
 import com.kma.GameAndroid.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping("/ChangeLevel")
     public ResponseEntity<String> changeLevel(HttpServletRequest request,
                                               @RequestParam("level") String level,
@@ -29,18 +30,26 @@ public class UserController {
         return ResponseEntity.ok("success");
     }
 
-    @GetMapping("/getUsers")
+    @GetMapping("/getInfo")
     public String getUsername(HttpServletRequest request) {
         String userName = userService.getUsernameByToken(request);
+
         return userName;
     }
 
-    @GetMapping("/countByEmail")
-    public Long countByEmail(@RequestParam("email") String email) {
-        Long count = userRepository.countByEmail(email);
-        return count;
+    @PostMapping("/changeName")
+    public ResponseEntity<String> changeName(HttpServletRequest request,
+                                             @RequestBody NameDto nameDto) {
+        userService.changeName(request, nameDto.getName());
+        return ResponseEntity.ok("success");
     }
 
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(HttpServletRequest request,
+                                                 @RequestBody PasswordDto passwordDto) {
+        userService.changePassword(request, passwordDto);
+        return ResponseEntity.ok("success");
+    }
 
 
     @GetMapping("/getLevelData")
@@ -55,26 +64,31 @@ public class UserController {
         List<User> rank = userService.findTop6ByOrderByTime1ASC();
         return ResponseEntity.ok(rank);
     }
+
     @GetMapping("/rank2")
     public ResponseEntity<List<User>> rank2() {
         List<User> rank = userService.findTop6ByOrderByTime2ASC();
         return ResponseEntity.ok(rank);
     }
+
     @GetMapping("/rank3")
     public ResponseEntity<List<User>> rank3() {
         List<User> rank = userService.findTop6ByOrderByTime3ASC();
         return ResponseEntity.ok(rank);
     }
+
     @GetMapping("/rank4")
     public ResponseEntity<List<User>> rank4() {
         List<User> rank = userService.findTop6ByOrderByTime4ASC();
         return ResponseEntity.ok(rank);
     }
+
     @GetMapping("/rank5")
     public ResponseEntity<List<User>> rank5() {
         List<User> rank = userService.findTop6ByOrderByTime5ASC();
         return ResponseEntity.ok(rank);
     }
+
     @GetMapping("/rank6")
     public ResponseEntity<List<User>> rank6() {
         List<User> rank = userService.findTop6ByOrderByTime6ASC();
