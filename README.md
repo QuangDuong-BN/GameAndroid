@@ -10,7 +10,7 @@
   - Spring security.
   - Spring data jpa.
 
-**Frontend:** flutter .
+**Frontend:** flutter.
 
 
 ## API Reference
