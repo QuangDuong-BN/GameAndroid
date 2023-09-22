@@ -14,5 +14,5 @@
 
 ## Authors
 
-- [@QuangDuong-BN](https://www.github.com/octokatherine)
+- [@QuangDuong-BN](https://github.com/QuangDuong-BN)
   
