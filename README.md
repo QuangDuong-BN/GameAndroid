@@ -9,7 +9,6 @@
   - Spring Boot.
   - Spring security( JSON Web Token ).
   - Spring data jpa
-  - 
 
 **Frontend:** flutter .
 
