@@ -102,7 +102,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime1(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime1(email, time);
             }
         }
@@ -111,7 +111,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime2(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime2(email, time);
             }
         }
@@ -120,7 +120,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime3(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime3(email, time);
             }
         }
@@ -129,7 +129,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime4(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime4(email, time);
             }
         }
@@ -138,7 +138,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime5(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime5(email, time);
             }
         }
@@ -147,7 +147,7 @@ public class UserService {
             if (oldTime == null) {
                 userRepository.updateTime6(email, time);
             } else {
-                if (oldTime < time)
+                if (oldTime > time)
                     userRepository.updateTime6(email, time);
             }
         }
