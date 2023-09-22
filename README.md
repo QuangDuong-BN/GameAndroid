@@ -6,7 +6,7 @@
 ## Tech Stack
 
 **Server:** 
-  - Spring Boot.
+  - Spring boot.
   - Spring security.
   - Spring data jpa.
 
