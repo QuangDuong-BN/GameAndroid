@@ -4,6 +4,7 @@ import com.kma.GameAndroid.config.JwtService;
 import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.entityDto.LevelDataDto;
 import com.kma.GameAndroid.entityDto.PasswordDto;
+import com.kma.GameAndroid.entityDto.UserDto;
 import com.kma.GameAndroid.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,15 @@ public class UserService {
             return username;
         }
         return "Token not provided or invalid";
+    }
+
+    public UserDto getUserDto(HttpServletRequest request) {
+        String email = getUsernameByToken(request);
+        Optional<User> user = userRepository.findByEmail(email);
+        UserDto userDto = new UserDto();
+        userDto.name = user.get().getName();
+        userDto.email = user.get().getEmail();
+        return userDto;
     }
 
     public void changeName(HttpServletRequest request, String name) {

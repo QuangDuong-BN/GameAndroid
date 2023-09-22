@@ -30,11 +30,9 @@ public class UserController {
         return ResponseEntity.ok("success");
     }
 
-    @GetMapping("/getInfo")
-    public String getUsername(HttpServletRequest request) {
-        String userName = userService.getUsernameByToken(request);
-
-        return userName;
+    @GetMapping()
+    public ResponseEntity<UserDto> getUsername(HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserDto(request));
     }
 
     @PostMapping("/changeName")
