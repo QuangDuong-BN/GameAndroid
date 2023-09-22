@@ -7,10 +7,38 @@
 
 **Server:** 
   - Spring Boot.
-  - Spring security( JSON Web Token ).
-  - Spring data jpa
+  - Spring security.
+  - Spring data jpa.
 
 **Frontend:** flutter .
+
+
+## API Reference
+
+#### register
+
+```http
+  POST localhost:8080/api/v1/auth/register
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` |  `register`
+
+#### authenticate
+
+```http
+  POST localhost:8080/api/v1/auth/authenticate
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`, `password` | `string` ,`string` | `authenticate` |
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
+
 
 ## Authors
 
