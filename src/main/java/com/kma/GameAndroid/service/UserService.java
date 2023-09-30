@@ -63,11 +63,11 @@ public class UserService {
         userRepository.updateName(email, name);
     }
 
-    public void changePassword(HttpServletRequest request, PasswordDto passwordDto) {
+    public void changePassword(HttpServletRequest request, String password) {
         String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
         token = token.substring(7); // Loại bỏ "Bearer " từ token
         String email = jwtService.extractUsername(token); // Sử dụng JwtService để lấy username từ token
-        userRepository.updatePassword(email, passwordEncoder.encode(passwordDto.getPassword()));
+        userRepository.updatePassword(email, passwordEncoder.encode(password));
     }
 
     public List<User> findTop6ByOrderByTime1ASC() {
@@ -94,7 +94,16 @@ public class UserService {
         return userRepository.findTop6ByOrderByTime6ASC();
     }
 
-
+    //check null and romve null
+    public List<User> removeNull(List<User> users, int level) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getTime1() == null) {
+                users.remove(i);
+                i--;
+            }
+        }
+        return users;
+    }
     public void changeLevel(String email, String level, Double time) {
         if (level.equals("1")) {
 
