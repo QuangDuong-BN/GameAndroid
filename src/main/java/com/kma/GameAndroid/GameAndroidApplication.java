@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @OpenAPIDefinition(
 		info = @Info(
-				title = "API app hotel",
+				title = "API app game android",
 				version = "1.0.0",
-				description = "Api sử dụng trong app khách sạn.",
+				description = "Api sử dụng trong app game android.",
 				contact = @Contact(
 						name = "QuangDuong",
 						email = "quangduong19992001@gmail.com"
