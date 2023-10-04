@@ -1,10 +1,7 @@
 package com.kma.GameAndroid.controller;
 
 import com.kma.GameAndroid.entity.User;
-import com.kma.GameAndroid.entityDto.LevelDataDto;
-import com.kma.GameAndroid.entityDto.NameDto;
-import com.kma.GameAndroid.entityDto.PasswordDto;
-import com.kma.GameAndroid.entityDto.UserDto;
+import com.kma.GameAndroid.entityDto.*;
 import com.kma.GameAndroid.repository.UserRepository;
 import com.kma.GameAndroid.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<UserDto> getUsername(HttpServletRequest request) {
+    public ResponseEntity<UserDto2> getUsername(HttpServletRequest request) {
         return ResponseEntity.ok(userService.getUserDto(request));
     }
 
