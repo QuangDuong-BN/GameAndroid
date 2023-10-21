@@ -9,6 +9,7 @@
   - Spring boot.
   - Spring security.
   - Spring data jpa.
+  - MongoDB
 
 **Frontend:** flutter.
 
@@ -23,7 +24,7 @@
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` |  `register`
+| `api_key` | `string` |  `register`|
 
 #### authenticate
 
