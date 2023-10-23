@@ -14,6 +14,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // tim kiem user theo email
     Optional<User> findByEmail(String email);
 
+    //set urlImage
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.urlImage = :urlImage WHERE u.email = :email")
+    void updateUrlImage(@Param("email") String email, @Param("urlImage") String urlImage);
+
+    @Query("SELECT u.urlImage FROM User u WHERE u.email = :email")
+    String getUrlImageByEmail(String email);
+
     @Query("SELECT u FROM User u WHERE u.time1 IS NOT NULL ORDER BY u.time1 ASC LIMIT 10")
     List<User> findTop6ByOrderByTime1ASC();
 

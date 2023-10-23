@@ -15,8 +15,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
 
-  swaggger:
-    enabled=true:
-springdoc:
-  swagger-ui:
-    path=/swagger-ui.html
+cloudinary:
+  cloud-name: djq4zsauv
+  api-key: 518669628185527
+  api-secret: I5Co_VfRGEU2sWRXj3gaU3QQULw

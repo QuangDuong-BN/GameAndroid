@@ -57,6 +57,17 @@ public class UserService {
         return userDto;
     }
 
+    public void setUrlImage(HttpServletRequest request , String imageUrl) {
+        String email = getUsernameByToken(request);
+        userRepository.updateUrlImage(email, imageUrl);
+    }
+
+    public String getImageUrl(HttpServletRequest request) {
+        String email = getUsernameByToken(request);
+        return userRepository.getUrlImageByEmail(email);
+    }
+
+
     public void changeName(HttpServletRequest request, String name) {
         String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
         token = token.substring(7); // Loại bỏ "Bearer " từ token
