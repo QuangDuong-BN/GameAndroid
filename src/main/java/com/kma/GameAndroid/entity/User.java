@@ -26,7 +26,9 @@ public class User implements UserDetails {
     private Integer id;
     private String name;
     private String email;
+
     private String password;
+    private String urlImage;
     @Column(columnDefinition = "double precision default 0.0")
     private Double time1 = 0.0;
     @Column(columnDefinition = "double precision default 0.0")

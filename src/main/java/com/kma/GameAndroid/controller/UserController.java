@@ -1,10 +1,7 @@
 package com.kma.GameAndroid.controller;
 
 import com.kma.GameAndroid.entity.User;
-import com.kma.GameAndroid.entityDto.LevelDataDto;
-import com.kma.GameAndroid.entityDto.NameDto;
-import com.kma.GameAndroid.entityDto.PasswordDto;
-import com.kma.GameAndroid.entityDto.UserDto;
+import com.kma.GameAndroid.entityDto.*;
 import com.kma.GameAndroid.repository.UserRepository;
 import com.kma.GameAndroid.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,23 +28,32 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<UserDto> getUsername(HttpServletRequest request) {
+    public ResponseEntity<UserDto2> getUsername(HttpServletRequest request) {
         return ResponseEntity.ok(userService.getUserDto(request));
     }
 
-    @PostMapping("/changeName")
+    @PutMapping("/changeName")
     public ResponseEntity<String> changeName(HttpServletRequest request,
                                              @RequestBody NameDto nameDto) {
         userService.changeName(request, nameDto.getName());
         return ResponseEntity.ok("success");
     }
 
-    @PostMapping("/changePassword")
+    @PutMapping("/changePassword")
     public ResponseEntity<String> changePassword(HttpServletRequest request,
                                                  @RequestBody PasswordDto passwordDto) {
-        userService.changePassword(request, passwordDto);
+        userService.changePassword(request, passwordDto.getPassword());
         return ResponseEntity.ok("success");
     }
+    @PutMapping("/changeInfo")
+    public ResponseEntity<String> changeInfo(HttpServletRequest request,
+                                             @RequestBody UserDto userDto) {
+
+        userService.changeName(request, userDto.getName());
+        userService.changePassword(request, userDto.getPassword());
+        return ResponseEntity.ok("success");
+    }
+
 
 
     @GetMapping("/getLevelData")

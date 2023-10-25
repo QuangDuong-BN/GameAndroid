@@ -5,6 +5,7 @@ import com.kma.GameAndroid.entity.User;
 import com.kma.GameAndroid.entityDto.LevelDataDto;
 import com.kma.GameAndroid.entityDto.PasswordDto;
 import com.kma.GameAndroid.entityDto.UserDto;
+import com.kma.GameAndroid.entityDto.UserDto2;
 import com.kma.GameAndroid.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +48,25 @@ public class UserService {
         return "Token not provided or invalid";
     }
 
-    public UserDto getUserDto(HttpServletRequest request) {
+    public UserDto2 getUserDto(HttpServletRequest request) {
         String email = getUsernameByToken(request);
         Optional<User> user = userRepository.findByEmail(email);
-        UserDto userDto = new UserDto();
+        UserDto2 userDto = new UserDto2();
         userDto.name = user.get().getName();
         userDto.email = user.get().getEmail();
         return userDto;
     }
+
+    public void setUrlImage(HttpServletRequest request , String imageUrl) {
+        String email = getUsernameByToken(request);
+        userRepository.updateUrlImage(email, imageUrl);
+    }
+
+    public String getImageUrl(HttpServletRequest request) {
+        String email = getUsernameByToken(request);
+        return userRepository.getUrlImageByEmail(email);
+    }
+
 
     public void changeName(HttpServletRequest request, String name) {
         String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
@@ -63,11 +75,11 @@ public class UserService {
         userRepository.updateName(email, name);
     }
 
-    public void changePassword(HttpServletRequest request, PasswordDto passwordDto) {
+    public void changePassword(HttpServletRequest request, String password) {
         String token = request.getHeader("Authorization"); // Lấy token từ Header (thường được gửi trong header Authorization)
         token = token.substring(7); // Loại bỏ "Bearer " từ token
         String email = jwtService.extractUsername(token); // Sử dụng JwtService để lấy username từ token
-        userRepository.updatePassword(email, passwordEncoder.encode(passwordDto.getPassword()));
+        userRepository.updatePassword(email, passwordEncoder.encode(password));
     }
 
     public List<User> findTop6ByOrderByTime1ASC() {
@@ -94,7 +106,16 @@ public class UserService {
         return userRepository.findTop6ByOrderByTime6ASC();
     }
 
-
+    //check null and romve null
+    public List<User> removeNull(List<User> users, int level) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getTime1() == null) {
+                users.remove(i);
+                i--;
+            }
+        }
+        return users;
+    }
     public void changeLevel(String email, String level, Double time) {
         if (level.equals("1")) {
 
